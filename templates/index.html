@@ -1,0 +1,185 @@
+{% comment %} <h1>Name : {{name}}</h1>
+<h1>age : {{age}}</h1>
+<h1>College : {{college}}</h1>
+<h1>Course : {{course}}</h1> {% endcomment %}
+
+
+
+{% comment %} {%if user.is_authenticated%}
+<h1>Welcome {{user.username}}</h1>
+<form method="POST" action="API">
+    {% csrf_token %}
+    <h3>Name:</h3><textarea name="name"></textarea><br>
+    <h3>Photo:</h3><textarea name="link"></textarea><br>
+    <h3>Age:</h3><textarea name="age"></textarea><br>
+    <h3>Height:</h3><textarea name="height"></textarea><br>
+    <h3>Weight:</h3><textarea name="weight"></textarea><br>
+    <input type="submit"/>
+</form>
+
+<button onclick="location.href='{% url 'logout' %}'">LogOut</button>
+<button onclick="location.href='{% url 'api' %}'">See you data</button>
+{% else %}
+<button onclick="location.href='{% url 'register' %}'">Click to register</button>
+{%endif %} {% endcomment %}
+{% comment %} <button onclick="location.href='{% url 'profile/user.username' %}'">{{user.username}}</button> {% endcomment %} 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <style>
+    
+*{
+ margin: 0;
+ padding: 0;
+}
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.conatiner{
+  height: 60vh;
+  width: 60vw;
+  background-color: rgb(112, 151, 185);
+  border-radius: 40px;
+  margin: 50px; 
+}
+
+h1{
+  position: relative;
+  left: 40px;
+  top: 20px;
+  color: aliceblue;
+  display: inline;
+ 
+}
+h2{
+  position: relative; 
+  top: -10px;
+  left: 135px;
+  color: aliceblue;
+  text-decoration: none;
+}
+.name,.age,.height,.weight{
+  height: 60px;
+  width: 500px;
+  position: relative;
+  left: 150px;
+  font-size: 24px;
+  color: rgb(52, 50, 48);
+}
+.pname,.page,.pheight,.pweight{
+  height: 35px;
+  width: 230px;
+  margin: 20px;
+  border-radius: 10px;
+  border: none;
+  padding-left: 10px;
+}
+.submit{
+  height: 35px;
+  width: 90px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(30, 53, 62);
+  font-weight: 400;
+  color: aliceblue;
+  position: relative;
+  left: 240px;
+  top: 20px;
+}
+.log-out{
+  height: 35px;
+  width: 90px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(30, 53, 62);
+  font-weight: 400;
+  color: aliceblue;
+  position: relative;
+  left: 280px;
+  top: 20px;
+}
+
+.submit:hover,.log-out:hover{
+  background-color:rgb(63, 98, 112) ;
+}
+.seedata{
+  height: 35px;
+  width: 120px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(30, 53, 62);
+  font-weight: 400;
+  color: aliceblue;
+  position: relative;
+  left: 350px;
+  top: 60px;
+}
+  </style>
+</head>
+<body>
+
+{%if user.is_authenticated%}
+  <div class="conatiner">
+    <h1>Hello!</h1>
+    <h2><a  style="text-decoration:none;color:white" href="{% url 'profile' user.username %}">{{user.username}}</a></h2>
+    <form method="POST" action="API" class="details">
+    {%csrf_token%}
+    <div class="name">
+      Name :
+      <input type="text" placeholder="name" class="pname" name="name" />
+    </div>
+    <div class="name">
+        Photo :
+        <input type="text" placeholder="photo//URL..." class="pname" name="link"/>
+      </div>
+      <div class="name">
+        Channel Name :
+        <input type="text" placeholder="photo//URL..." class="pname" name="cname"/>
+      </div>
+    <div class="age">
+      time : 
+      <input type="text" placeholder="Time" class="page" name="time" required />
+
+    </div>
+    <div class="height">
+      month:
+      <input type="number" placeholder="months" class="pheight" name="month"/>
+
+    </div>
+    <div class="weight">
+      views :
+      <input type="number" placeholder="views" class="pweight" name="view" />
+
+    </div>
+
+    <input type="submit" class="submit">
+    <button onclick="location.href='{% url 'logout' %}'" class="log-out">LogOut</button>
+    <button onclick="location.href='{% url 'api' %}'" class="seedata">See you data</button>
+    {%else%}
+    <button onclick="location.href='{% url 'register' %}'" style="height: 35px;
+    width: 120px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(30, 53, 62);
+    font-weight: 400;
+    color: aliceblue;
+    position: relative;
+    left: -1%;
+    top:350px;">Click to register</button>
+    {%endif %}
+
+
+  </form>
+
+   
+  </div>
+  
+</body>
+</html>
